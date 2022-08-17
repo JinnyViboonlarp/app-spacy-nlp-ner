@@ -48,6 +48,7 @@ MMIF_VERSION = '0.4.0'
 MMIF_PYTHON_VERSION = '0.4.6'
 CLAMS_PYTHON_VERSION = '0.5.1'
 SPACY_VERSION = '3.1.2'
+SPACY_VERSION_UNCASED = '3.3.1'
 SPACY_LICENSE = 'MIT'
 
 
@@ -56,11 +57,17 @@ TEXT_DOCUMENT = os.path.basename(str(DocumentTypes.TextDocument))
 
 DEBUG = False
 dep_choice = False # choice to use dependency parser
+uncased_choice = False # choice to use uncased model
 
 
 class SpacyApp(ClamsApp):
 
     def _appmetadata(self):
+        
+        if(uncased_choice):
+            spacy_version = SPACY_VERSION_UNCASED
+        else:
+            spacy_version = SPACY_VERSION
         metadata = AppMetadata(
             identifier='https://apps.clams.ai/spacy_nlp',
             url='https://github.com/clamsproject/app-spacy-nlp',
@@ -68,7 +75,7 @@ class SpacyApp(ClamsApp):
             description="Apply spaCy NLP to all text documents in a MMIF file.",
             app_version=APP_VERSION,
             app_license=APP_LICENSE,
-            analyzer_version=SPACY_VERSION,
+            analyzer_version=spacy_version,
             analyzer_license=SPACY_LICENSE,
             mmif_version=MMIF_VERSION
         )
@@ -121,6 +128,7 @@ class SpacyApp(ClamsApp):
         return text
 
     def _add_tool_output(self, doc, view, doc_id=None):
+        
         spacy_doc = nlp(self._read_text(doc))
         # keep track of char offsets of all tokens
         tok_idx = {}
@@ -252,6 +260,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.uncased:
+        uncased_choice = True
         ner = spacy.load("ner_models/model-best-uncased-sm")
     if args.dep:
         dep_choice = True
