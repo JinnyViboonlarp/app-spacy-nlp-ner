@@ -88,14 +88,14 @@ $ python app.py -t --dep example-mmif.json out.json
 ### Test with docker
 
 cased
-- change the last line of annotate_all_transcripts.py to annotate_input_mmif_files(uncased_choice = False)
+- change the last line of annotate_all_transcripts.py to `annotate_input_mmif_files(uncased_choice = False)`
 ```
 $ docker build -t clams-spacy-nlp-cased -f Dockerfile-cased .
 $ docker run --rm -d -p 5000:5000 clams-spacy-nlp-cased
 ```
 
 uncased
-- change the last line of annotate_all_transcripts.py to annotate_input_mmif_files(uncased_choice = True)
+- change the last line of annotate_all_transcripts.py to `annotate_input_mmif_files(uncased_choice = True)`
 - stop the container clams-spacy-nlp-cased if it's running
 ```
 $ docker build -t clams-spacy-nlp-uncased -f Dockerfile-uncased .
