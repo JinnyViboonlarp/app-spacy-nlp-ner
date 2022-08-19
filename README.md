@@ -88,7 +88,6 @@ $ python app.py -t --dep example-mmif.json out.json
 ### Test with docker
 
 cased
-- if there is container running at port 5000, stop it.
 ```
 $ docker build -t clams-spacy-nlp-cased -f Dockerfile-cased .
 $ docker run --rm -d -p 5000:5000 clams-spacy-nlp-cased
@@ -96,7 +95,6 @@ $ python annotate_all_transcripts.py
 ```
 
 uncased
-- if there is container running at port 5000, stop it.
 ```
 $ docker build -t clams-spacy-nlp-uncased -f Dockerfile-uncased .
 $ docker run --rm -d -p 5000:5000 clams-spacy-nlp-uncased
