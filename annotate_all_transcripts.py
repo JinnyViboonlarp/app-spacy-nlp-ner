@@ -1,5 +1,6 @@
 import os
 import sys
+import argparse
 
 from mmif.serialize import Mmif, Annotation
 from mmif.vocabulary import AnnotationTypes, DocumentTypes
@@ -85,5 +86,15 @@ if __name__ == "__main__":
 
     #create_uncased_transcripts()
     #create_input_mmif_files(uncased_choice = True)
-    #annotate_input_mmif_files_without_docker()
-    annotate_input_mmif_files(uncased_choice = True)
+    #annotate_input_mmif_files_without_docker(uncased_choice = True)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--uncased',  action='store_true', help="select the NER model trained for uncased data")
+    args = parser.parse_args()
+
+    if args.uncased:
+        uncased_choice = True
+    else:
+        uncased_choice = False
+        
+    annotate_input_mmif_files(uncased_choice)
