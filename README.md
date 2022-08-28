@@ -90,7 +90,7 @@ $ python app.py -t --dep input-mmif/example-transcript.json output-mmif/example-
 
 ## Testing the app in a Docker container
 
-To test the app **without** the custom-trained NER model, run the below command on your terminal.
+To test the app **without** the uncased model, run the below command on your terminal.
 ```
 $ docker build -t clams-spacy-nlp-cased -f Dockerfile-cased .
 $ docker run --rm -d -p 5000:5000 clams-spacy-nlp-cased
