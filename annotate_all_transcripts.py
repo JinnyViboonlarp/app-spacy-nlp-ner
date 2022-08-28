@@ -55,7 +55,7 @@ def annotate_input_mmif_files(uncased_choice = False):
     # this module is used to test the clams app on all transcripts, with Docker
     # the Docker container must first be built and running
     # The commands are "docker build -t clams-spacy-nlp -f Dockerfile-cased ."
-    # (or Dockerfile-uncased if truecase option)
+    # (or Dockerfile-uncased if using uncased model)
     # and then "docker run --rm -d -p 5000:5000 clams-spacy-nlp"
     if(uncased_choice):
         in_dir = 'input-mmif-uncased'
