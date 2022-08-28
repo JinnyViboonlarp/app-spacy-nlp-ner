@@ -5,13 +5,13 @@ entities, and (if specified so) dependencies.
 
 Usage:
 
-$ python app.py -t example-mmif.json out.json
+$ python app.py -t input-mmif/example-transcript.json output-mmif/example-transcript.json
 $ python app.py [--develop]
 
 The first invocation is to just test the app without running a server. The
 second is to start a server, which you can ping with
 
-$ curl -H "Accept: application/json" -X POST -d@example-mmif.json http://0.0.0.0:5000/
+$ curl -H "Accept: application/json" -X POST -d@input-mmif/example-transcript.json http://0.0.0.0:5000/
 
 With the --develop option you get a FLask server running in development mode,
 without it Gunicorn will be used for a more stable server.
@@ -151,9 +151,9 @@ class SpacyApp(ClamsApp):
                 doc_id, tok_idx[sent.start][0], tok_idx[sent.end - 1][1],
                 { "text": sent.text })
 
-        # Jinny: the off-the-shelf spaCy model does not recognize 'jim lehrer' (lowercased) as a person
-        # but the spaCy NER model trained on CoNLL does. If the user specifies to use the uncased model,
-        # that model would be used instead of the off-the-shelf model
+        # The off-the-shelf spaCy model does not recognize 'jim lehrer' (lowercased)
+        # as a person, but the model trained on uncased CoNLL data does.
+        # This uncased model would be used if the user specifies so.
         if(ner != None):
             spacy_doc_ner = ner(self._read_text(doc))
             #spacy_doc_ner = ner((self._read_text(doc)).lower())
@@ -169,9 +169,11 @@ class SpacyApp(ClamsApp):
                     view, Uri.NE, Identifiers.new("ne"),
                     doc_id, tok_idx[ent.start][0], tok_idx[ent.end - 1][1],
                     { "text": ent.text, "category": ent.label_})
-                    # we have to be careful not to use ent.root.i since the uncased NER model can't recognize that
-        # if the user doesn't want to use the uncased model, then the normal cased model will be used to
-        # add the NER annotations
+                    # we have to be careful not to use ent.root.i since the
+                    # uncased NER model can't recognize that.
+                    
+        # If the user doesn't want to use the uncased model, then the default
+        # cased model will be used to add the NER annotations.
         else:
             for (n, ent) in enumerate(spacy_doc.ents):
                 add_annotation(

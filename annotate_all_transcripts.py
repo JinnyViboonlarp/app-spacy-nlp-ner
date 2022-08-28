@@ -15,7 +15,8 @@ def create_input_mmif_files(uncased_choice = False):
         ann = view.new_annotation(DocumentTypes.TextDocument, 'td1')
         with open(infile, 'r') as fh_in:
             text = fh_in.read()
-        ann.properties["text"] = {"@value": text} # can't use add_property module since a dict-type property is not allowed.
+        ann.properties["text"] = {"@value": text}
+        # can't use add_property module since a dict-type property is not allowed.
         mmif_str = mmif.serialize(pretty=True)
         return mmif_str
     
@@ -52,8 +53,9 @@ def annotate_input_mmif_files_without_docker(uncased_choice = False):
 
 def annotate_input_mmif_files(uncased_choice = False):
     # this module is used to test the clams app on all transcripts, with Docker
-    # the docker container must first be running
-    # The commands are "docker build -t clams-spacy-nlp -f Dockerfile-cased ." (or Dockerfile-uncased if truecase option) \
+    # the Docker container must first be built and running
+    # The commands are "docker build -t clams-spacy-nlp -f Dockerfile-cased ."
+    # (or Dockerfile-uncased if truecase option)
     # and then "docker run --rm -d -p 5000:5000 clams-spacy-nlp"
     if(uncased_choice):
         in_dir = 'input-mmif-uncased'
