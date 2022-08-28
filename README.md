@@ -68,7 +68,7 @@ As a result, when running `app.py`, an option could be specified so that the NER
 
 The uncased model is created by fine-tuning the NER layer of the default spaCy model (`en_core_web_sm`) on the CoNLL 2003 English dataset, after the data is all lowercased. More details on how the uncased model is created could be found in [this repo](https://github.com/JinnyViboonlarp/clams-spacy-tuning-ner).
 
-To test the app **without** the custom-trained NER model, run the below command on your terminal. The app would use the default spaCy model (`en-core-web-sm`) to do the NER task.
+To test the app **without** the uncased model, run the below command on your terminal. The app would use the default spaCy model (`en-core-web-sm`) to do the NER task.
 
 ```
 $ python app.py -t input-mmif/example-transcript.json output-mmif/example-transcript.json
@@ -77,7 +77,7 @@ $ python app.py -t input-mmif/example-transcript.json output-mmif/example-transc
 To test the app **with** the uncased model, use this command instead.
 
 ```
-$ python app.py -t input-mmif-uncased/example-transcript.json output-mmif-uncased/example-transcript.json
+$ python app.py -t -u input-mmif-uncased/example-transcript.json output-mmif-uncased/example-transcript.json
 ```
 
 ## Using this service with a dependency parser
