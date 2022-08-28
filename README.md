@@ -54,7 +54,7 @@ The spaCy code will run on each text document in the input MMIF file. The file `
     "text": {
       "@value": "Hello, this is Jim Lehrer with the NewsHour on PBS...."
     },
-	"id": "td1"
+    "id": "td1"
   }
 }
 ```
